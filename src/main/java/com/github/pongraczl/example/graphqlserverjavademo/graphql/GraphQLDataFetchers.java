@@ -2,6 +2,7 @@ package com.github.pongraczl.example.graphqlserverjavademo.graphql;
 
 import com.github.pongraczl.example.graphqlserverjavademo.service.ApocalypseService;
 import com.github.pongraczl.example.graphqlserverjavademo.service.SocialService;
+import com.github.pongraczl.example.graphqlserverjavademo.service.model.Creature;
 import com.google.common.collect.ImmutableMap;
 import graphql.schema.DataFetcher;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,21 +18,22 @@ public class GraphQLDataFetchers {
     @Autowired
     private SocialService socialService;
 
-    public DataFetcher getHumanByIdDataFetcher() {
+    public DataFetcher<Creature> getSomebodyByIdDataFetcher() {
         return dataFetchingEnvironment -> {
-            String humanId = dataFetchingEnvironment.getArgument("id");
-            return socialService.getHumans()
-                    .stream()
-                    .filter(human -> human.get("id").equals(humanId))
-                    .findFirst()
-                    .orElse(null);
+            String id = dataFetchingEnvironment.getArgument("id");
+            return socialService.getCreatureById(id);
         };
     }
 
-    public DataFetcher getAllHumans() {
-        DataFetcher dataFetcher = dataFetchingEnvironment -> {
-            return socialService.getHumans();
+    public DataFetcher<List<Creature>> getAllHumans() {
+        return dataFetchingEnvironment -> {
+            return socialService.getAllLiving();
         };
-        return dataFetcher;
+    }
+
+    public DataFetcher<List<Creature>> getAllCreatures() {
+        return dataFetchingEnvironment -> {
+            return socialService.getEveryBody();
+        };
     }
 }

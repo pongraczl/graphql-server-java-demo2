@@ -1,9 +1,10 @@
 type Query {
-    humanById(id: ID!): Human
-    allHumans: [Human]!
+    somebodyById(id: ID!): Creature
+    allHumans: [Creature]!
+    everyBody: [Creature]!
 }
 
-type Human {
+type Creature {
     id: ID
     name: String
     profession: String
