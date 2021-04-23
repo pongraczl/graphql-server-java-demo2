@@ -15,8 +15,12 @@ import java.util.Map;
 @Component
 public class GraphQLDataFetchers {
 
+    public static final String ZOMBIE_APOCALYPSE_HAS_BEGUN = "Zombie Apocalypse has begun!";
+    public static final String NEEDLESS_TO_START_ZOMBIE_APOCALYPSE = "Needless to start Zombie Apocalypse. It's already here!";
     @Autowired
     private SocialService socialService;
+    @Autowired
+    private ApocalypseService apocalypseService;
 
     public DataFetcher<Creature> getSomebodyByIdDataFetcher() {
         return dataFetchingEnvironment -> {
@@ -34,6 +38,13 @@ public class GraphQLDataFetchers {
     public DataFetcher<List<Creature>> getAllCreatures() {
         return dataFetchingEnvironment -> {
             return socialService.getEveryBody();
+        };
+    }
+
+    public DataFetcher<String> startZombieApocalypseDataFetcher() {
+        return dataFetchingEnvironment -> {
+            boolean isApocalypseActivatedNow = apocalypseService.startZombieApocalypse();
+            return isApocalypseActivatedNow ? ZOMBIE_APOCALYPSE_HAS_BEGUN : NEEDLESS_TO_START_ZOMBIE_APOCALYPSE;
         };
     }
 }
