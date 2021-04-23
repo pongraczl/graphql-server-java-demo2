@@ -53,7 +53,8 @@ public class GraphQLProvider {
                         .dataFetcher("allHumans", graphQLDataFetchers.getAllHumans())
                         .dataFetcher("everyBody", graphQLDataFetchers.getAllCreatures()))
                 .type(newTypeWiring("Mutation")
-                        .dataFetcher("startZombieApocalypse", graphQLDataFetchers.startZombieApocalypseDataFetcher()))
+                        .dataFetcher("startZombieApocalypse", graphQLDataFetchers.startZombieApocalypseDataFetcher())
+                        .dataFetcher("addZombies", graphQLDataFetchers.addZombiesDataFetcher()))
                 .build();
     }
 }

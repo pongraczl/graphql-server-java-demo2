@@ -8,6 +8,7 @@ import graphql.schema.DataFetcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.xml.crypto.Data;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -47,4 +48,12 @@ public class GraphQLDataFetchers {
             return isApocalypseActivatedNow ? ZOMBIE_APOCALYPSE_HAS_BEGUN : NEEDLESS_TO_START_ZOMBIE_APOCALYPSE;
         };
     }
+
+    public DataFetcher<List<Creature>> addZombiesDataFetcher() {
+        return dataFetchingEnvironment -> {
+            Integer count = dataFetchingEnvironment.getArgument("count");
+            return apocalypseService.addZombies(count);
+        };
+    }
+
 }

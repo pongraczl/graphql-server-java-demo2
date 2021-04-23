@@ -7,6 +7,7 @@ type Query {
 
 type Mutation {
     startZombieApocalypse: String
+    addZombies(count: Int): [Creature]
 }
 
 type Creature {
@@ -16,9 +17,13 @@ type Creature {
     lifeStatus: LifeStatus!
 }
 
-
 enum LifeStatus {
     ALIVE
     LIVING_DEAD
     REALLY_DEAD
+}
+
+input HumanInput {
+    name: String
+    profession: String
 }
