@@ -13,13 +13,19 @@ public class SocialService {
     private List<Map<String, String>> humans = Arrays.asList(
             ImmutableMap.of("id", "human-1",
                     "name", "Carl the Other",
-                    "profession", ""),
+                    "profession", "",
+                    "lifeStatus", LifeStatus.ALIVE.toString()),
             ImmutableMap.of("id", "human-2",
                     "name", "Sarah Connor",
-                    "profession", "waitress")
+                    "profession", "waitress",
+                    "lifeStatus", LifeStatus.ALIVE.toString())
     );
 
     public List<Map<String, String>> getHumans() {
         return humans;
+    }
+
+    public enum LifeStatus {
+        ALIVE, LIVING_DEAD, REALLY_DEAD
     }
 }

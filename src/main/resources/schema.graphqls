@@ -7,4 +7,11 @@ type Human {
     id: ID
     name: String
     profession: String
+    lifeStatus: LifeStatus!
+}
+
+enum LifeStatus {
+    ALIVE
+    LIVING_DEAD
+    REALLY_DEAD
 }
