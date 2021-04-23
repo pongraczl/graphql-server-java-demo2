@@ -27,4 +27,11 @@ public class GraphQLDataFetchers {
                     .orElse(null);
         };
     }
+
+    public DataFetcher getAllHumans() {
+        DataFetcher dataFetcher = dataFetchingEnvironment -> {
+            return socialService.getHumans();
+        };
+        return dataFetcher;
+    }
 }

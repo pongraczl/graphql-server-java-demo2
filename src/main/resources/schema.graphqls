@@ -1,5 +1,6 @@
 type Query {
-    humanById(id: ID): Human
+    humanById(id: ID!): Human
+    allHumans: [Human]!
 }
 
 type Human {
