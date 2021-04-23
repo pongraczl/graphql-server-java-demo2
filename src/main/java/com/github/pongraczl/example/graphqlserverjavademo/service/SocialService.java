@@ -1,13 +1,11 @@
 package com.github.pongraczl.example.graphqlserverjavademo.service;
 
 import com.github.pongraczl.example.graphqlserverjavademo.service.model.Creature;
-import com.google.common.collect.ImmutableMap;
+import com.github.pongraczl.example.graphqlserverjavademo.service.model.HumanInput;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -15,11 +13,10 @@ public class SocialService {
 
     private final List<Creature> creatures = new ArrayList<>();
 
-    /* Sample data initialization */
-    {
-        creatures.add(Creature.createNewHuman("Bad Guy", "hangman"));
-        creatures.add(Creature.createNewHuman("Carl the Other", ""));
-        creatures.add(Creature.createNewHuman("Sarah Connor", "waitress"));
+    /* Sample data initialization */ {
+        addHuman("Bad Guy", "hangman");
+        addHuman("Carl the Other", "");
+        addHuman("Sarah Connor", "waitress");
     }
 
 
@@ -41,8 +38,19 @@ public class SocialService {
                 .collect(Collectors.toList());
     }
 
-    public void addCreature(Creature creature) {
+    public Creature addCreature(Creature creature) {
         creatures.add(creature);
+        return creature;
+    }
+
+    public Creature addHuman(String name, String profession) {
+        return addCreature(Creature.createNewHuman(name, profession));
+    }
+
+    public List<Creature> addHumans(List<HumanInput> humansToAdd) {
+        return humansToAdd.stream()
+                .map(human -> addHuman(human.getName(), human.getProfession()))
+                .collect(Collectors.toList());
     }
 
     public void updateCreature(Creature updatedCreature) {

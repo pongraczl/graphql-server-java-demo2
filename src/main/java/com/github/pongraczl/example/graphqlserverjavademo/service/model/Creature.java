@@ -21,6 +21,9 @@ public class Creature {
         lifeStatus = LifeStatus.REALLY_DEAD;
     }
 
+    public Creature(){
+    }
+
     private Creature(String id, boolean isZombie) {
         this.id = id;
         lifeStatus = isZombie ? LifeStatus.LIVING_DEAD : LifeStatus.ALIVE;
