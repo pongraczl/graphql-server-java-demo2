@@ -1,0 +1,9 @@
+type Query {
+    humanById(id: ID): Human
+}
+
+type Human {
+    id: ID
+    name: String
+    profession: String
+}
