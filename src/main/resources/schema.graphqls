@@ -7,8 +7,9 @@ type Query {
 
 type Mutation {
     startZombieApocalypse: String
-    addHumans(humans: [HumanInput!]): [Creature]
-    addZombies(count: Int): [Creature]
+    addHumans(humans: [HumanInput!]!): [Creature]
+    addZombies(count: Int!): [Creature]
+    kill(killer: ID!, victim: ID!): [Creature]
 }
 
 type Creature {

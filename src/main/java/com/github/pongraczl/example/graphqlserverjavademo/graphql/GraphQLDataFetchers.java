@@ -2,14 +2,14 @@ package com.github.pongraczl.example.graphqlserverjavademo.graphql;
 
 import com.github.pongraczl.example.graphqlserverjavademo.service.ApocalypseService;
 import com.github.pongraczl.example.graphqlserverjavademo.service.SocialService;
+import com.github.pongraczl.example.graphqlserverjavademo.service.model.CombatResult;
 import com.github.pongraczl.example.graphqlserverjavademo.service.model.Creature;
 import com.github.pongraczl.example.graphqlserverjavademo.service.model.HumanInput;
 import graphql.schema.DataFetcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -68,5 +68,20 @@ public class GraphQLDataFetchers {
 
     private HumanInput transformToHumanInput(Map<String, String> rawInput) {
         return new HumanInput(rawInput.get("name"), rawInput.get("profession"));
+    }
+
+    public DataFetcher<List<Creature>> killDataFetcher() {
+        return dataFetchingEnvironment -> {
+            String killerId = dataFetchingEnvironment.getArgument("killer");
+            String victimId = dataFetchingEnvironment.getArgument("victim");
+            CombatResult combatResult = apocalypseService.kill(killerId, victimId);
+            return listOfNonNullCreatures(combatResult.getKiller(), combatResult.getVictim());
+        };
+    }
+
+    private List<Creature> listOfNonNullCreatures(Creature... items) {
+        return Arrays.stream(items)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 }
