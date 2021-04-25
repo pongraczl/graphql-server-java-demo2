@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.github.pongraczl.example</groupId>
-	<artifactId>graphql-server-java-demo</artifactId>
+	<artifactId>graphql-server-java-demo2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>graphql-server-java-demo</name>
+	<name>graphql-server-java-demo2</name>
 	<description>Demo project for a GraphQL Server with Java and Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
